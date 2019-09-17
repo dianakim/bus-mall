@@ -21,15 +21,44 @@
       </nav>
     </header>
     <main>
-      <div id="pic-container">
-        <img id="firstImg" src="" alt="" title="" />
-        <img id="secondImg" src="" alt="" title="" />
-        <img id="thirdImg" src="" alt="" title="" />
-      </div>
+      <sidebar>
+        <h2>Results</h2>
+        <ul id="results-list">
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+        </ul>
+      </sidebar>
+      <form id="pic-container">
+        <div>
+          <!-- <img id="thirdImg" src="" alt="" title="" /><br /> -->
+          <img id="thirdImg" src="img/modern-wine-goblet.jpg" /><br />
+          <input type="radio" id="imgThree" name="select" value="thirdImg">
+          <label for="imgThree">Select</label>
+        </div>
+        <div>
+          <!-- <img id="secondImg" src="" alt="" title="" /> -->
+          <img id="secondImg" src="img/baby-sweep-onesie.jpg" /><br />
+          <input type="radio" id="imgTwo" name="select" value="secondImg">
+          <label for="imgTwo">Select</label>
+        </div>
+        <div>
+          <!-- <img id="firstImg" src="" alt="" title="" /><br /> -->
+          <img id="firstImg" src="img/pet-sweep.jpg" /><br />
+          <input type="radio" id="imgOne" name="select" value="firstImg">
+          <label for="imgOne">Select</label>
+        </div>
+      </form>
     </main>
     <section>
       <canvas id="my-canvas" width=500px></canvas>
-    </section>
+      </section>
     <section>
       <canvas id="bar-chart" width=800px></canvas>
     </section>
