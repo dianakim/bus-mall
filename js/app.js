@@ -15,25 +15,25 @@ var allPics = [];
 function Picture(name) {
   this.url = '../img/${name}.';
   this.src = name;
-  this.alt = 
+  this.alt = name;
 
   allPics.push(this);
 }
 
-var newGraph = document.getElementById('bar-chart');
+// var newGraph = document.getElementById('bar-chart');
 
-new Chart(newGraph).baseURI(barData);
+// new Chart(newGraph).baseURI(barData);
 
-var barData = {
-  labels: ['one', 'two', 'three', 'four'],
-  datasets: [
-    {
-      fillColor: 'rgba(172, 194, 132, 0.5)',
-      strokeColor: '#ACC260',
-      pointColor: '#fff',
-      pointStrokeColor: '#9DB86D',
-      data: [203, 156, 99, 251, 305, 247]
-    }
-  ]
-}
+// var barData = {
+//   labels: ['one', 'two', 'three', 'four'],
+//   datasets: [
+//     {
+//       fillColor: 'rgba(172, 194, 132, 0.5)',
+//       strokeColor: '#ACC260',
+//       pointColor: '#fff',
+//       pointStrokeColor: '#9DB86D',
+//       data: [203, 156, 99, 251, 305, 247]
+//     }
+//   ]
+// };
 

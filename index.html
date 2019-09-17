@@ -3,28 +3,62 @@
   <head>
     <link href="css/reset.css" type="text/css" rel="stylesheet" />
     <link href="css/style.css" type="text/css" rel="stylesheet" />
-    <title></title>
+    <title>Bus Mall</title>
   </head>
   <body>
     <header>
       <nav class="fixed-nav-bar">
         <ul>
-          <li class="nav"><a href="#home">Home</a></li>
+          <li class="nav"><a href="#contact">Contact</a></li>
           <li class="nav"><a href="#about">About</a></li>
-          <li class="nav"><a href="#other">Other</a></li>
+          <li class="nav"><a href="#products">Products</a></li>
+          <li class="nav"><a href="#home">Home</a></li>
         </ul>
+        <section> 
+          <img  id="company-logo" src="img/bus-logo-sm.png" alt="Logo" title="wheel logo" /></li>
+          <h1 id="company-name">Bus Mall</h1>
+        </section>
       </nav>
     </header>
     <main>
-      <div id="pic-container">
-        <img id="firstImg" src="" alt="" title="" />
-        <img id="secondImg" src="" alt="" title="" />
-        <img id="thirdImg" src="" alt="" title="" />
-      </div>
+      <sidebar>
+        <h2>Results</h2>
+        <ul id="results-list">
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+          <li class="results">lksdfj</li>
+        </ul>
+      </sidebar>
+      <form id="pic-container">
+        <div>
+          <!-- <img id="thirdImg" src="" alt="" title="" /><br /> -->
+          <img id="thirdImg" src="img/modern-wine-goblet.jpg" /><br />
+          <input type="radio" id="imgThree" name="select" value="thirdImg">
+          <label for="imgThree">Select</label>
+        </div>
+        <div>
+          <!-- <img id="secondImg" src="" alt="" title="" /> -->
+          <img id="secondImg" src="img/baby-sweep-onesie.jpg" /><br />
+          <input type="radio" id="imgTwo" name="select" value="secondImg">
+          <label for="imgTwo">Select</label>
+        </div>
+        <div>
+          <!-- <img id="firstImg" src="" alt="" title="" /><br /> -->
+          <img id="firstImg" src="img/pet-sweep.jpg" /><br />
+          <input type="radio" id="imgOne" name="select" value="firstImg">
+          <label for="imgOne">Select</label>
+        </div>
+      </form>
     </main>
     <section>
       <canvas id="my-canvas" width=500px></canvas>
-    </section>
+      </section>
     <section>
       <canvas id="bar-chart" width=800px></canvas>
     </section>
