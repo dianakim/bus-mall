@@ -5,7 +5,13 @@
   font-family: "Philosopher", sans-serif;
 }
 
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
+  margin: 0;
   padding-left: 20px;
   padding-right: 20px;
   line-height: 1.2;
@@ -75,16 +81,28 @@ header section {
 }
 
 main {
+  height: 100%;
   width: 100%;
   margin-top: 120px;
-  overflow: auto;
+  margin-bottom: 200px;
+  padding-bottom: 200px;
 }
 
 sidebar {
   display: inline-block;
+  vertical-align: top;
+  height: 100%;
   border: 1px solid #FFD02E;
   width: 18%;
   padding: 10px;
+  overflow: auto;
+}
+
+#content {
+  display: inline-block;
+	vertical-align: top;
+	height: 100%;
+	overflow: auto;
 }
 
 sidebar, #form-container {
@@ -103,9 +121,13 @@ sidebar h2 {
 }
 
 #form-container {
+  display: inline-block;
+  vertical-align: top;
+  height: 100%;
   border: 0.25px solid #FFD02E;
-  float: right;
   width: 78%;
+  overflow: auto;
+  margin-bottom: 100px;
 }
 
 .image {
@@ -148,7 +170,6 @@ label {
 }
 
 footer {
-  
   font-family: "Poiret One", cursive;
   position: fixed;
   left: 0;
