@@ -7,7 +7,7 @@ var formEl = document.getElementById('form-container');
 var firstImgEl = document.getElementById('firstImg');
 var secondImgEl = document.getElementById('secondImg');
 var thirdImgEl = document.getElementById('thirdImg');
-var previousPicArr = [];
+var previousPics = [];
 
 var allPics = [];
 
@@ -57,19 +57,19 @@ function randomInteger(min, max) {
 
 function renderPictures() {
   // Store current photo alt values into previousPicsArr
-  previousPicArr[0] = firstImgEl.alt;
-  previousPicArr[1] = secondImgEl.alt;
-  previousPicArr[2] = thirdImgEl.alt;
-  console.log('previousPicArr ', previousPicArr);
+  previousPics[0] = firstImgEl.alt;
+  previousPics[1] = secondImgEl.alt;
+  previousPics[2] = thirdImgEl.alt;
+  console.log('previousPics ', previousPics);
 
-  //get new, non-duplicate photos that do no duplicate any in previousPicArr
-  var picsToBeRendered = []; // Holds the photos to be rendered
+  //get new, non-duplicate photos that do no duplicate any in previousPics
+  var picsToBeRendered = [];
   var i = 3; // Number of photos needed to be selected
 
   // While a photo is still needed
   while(i > 0) {
-    // Check if there is already a photo in the pictureIndexArr
-    // If the current randNum is already in the pictureIndexArr
+    // Check if there is already a photo in the picsToBeRendered
+    // If the current randNum is already in the picsToBeRendered
     // Set duplicateIndex value to true and get a different randNum
     var duplicateIndex = false;
     var randNum = randomInteger(0, allPics.length - 1);
