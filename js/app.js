@@ -13,7 +13,7 @@ var submitEl = document.getElementById('vote-button');
 var resultsUlEl = document.getElementById('results-list');
 var previousPics = [];
 var picIndexesToRender = [];
-var selectionsNeeded = 2;
+var selectionsNeeded = 5;
 var allPics = [];
 
 function Picture(name) {
@@ -48,7 +48,9 @@ new Picture('usb-tentacle');
 new Picture('warped-watering-can');
 
 formEl.addEventListener('submit', handleSelectionSubmit);
-formEl.addEventListener('click', handleImageClick);
+firstImgEl.addEventListener('click', handleImageClick);
+secondImgEl.addEventListener('click', handleImageClick);
+thirdImgEl.addEventListener('click', handleImageClick);
 
 function handleSelectionSubmit(event) {
   event.preventDefault();
@@ -72,17 +74,17 @@ function handleSelectionSubmit(event) {
 
   if(selectionsNeeded === 0) {
     formEl.removeEventListener('submit', handleSelectionSubmit);
-    formEl.removeEventListener('click', handleImageClick);
+    firstImgEl.removeEventListener('click', handleImageClick);
+    secondImgEl.removeEventListener('click', handleImageClick);
+    thirdImgEl.removeEventListener('click', handleImageClick);
     submitEl.disabled = true;
     renderResults();
   }
 }
 
 function handleImageClick(event) {
-  // event.preventDefault();
-  var radioEl = document.getElementsByClassName(event.target.className);
-  console.log(radioEl);
-  radioEl[1].checked = true;
+  var radioEl = document.getElementById(event.target.className);
+  radioEl.checked = true;
 }
 
 function renderResults() {
