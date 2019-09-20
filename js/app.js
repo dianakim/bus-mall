@@ -57,7 +57,7 @@ function randomInteger(min, max) {
 (function() {
   var pictureIndexArr = [];
   var i = 3; // Number of photos needed to be selected
-  
+
   while(i > 0) {
     var duplicateIndex = false;
     var randNum = randomInteger(0, allPics.length - 1);
@@ -65,7 +65,10 @@ function randomInteger(min, max) {
     // And if the current randNum is already in the array
     // Break out of the loop to start the while loop again
     if(pictureIndexArr.length > 0) {
-      for(var j = 0; j < pictureIndexArr.length - 1; j++) {
+      for(var j = 0; j < pictureIndexArr.length; j++) {
+        console.log('randNum is ', randNum);
+        console.log('pictureIndexArr is ', pictureIndexArr[j]);
+        console.log('triple equals?  ', randNum === pictureIndexArr[j]);
         if(randNum === pictureIndexArr[j]) {
           duplicateIndex = true;
         }
