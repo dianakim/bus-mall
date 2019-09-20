@@ -7,6 +7,7 @@ var formEl = document.getElementById('form-container');
 var firstImgEl = document.getElementById('firstImg');
 var secondImgEl = document.getElementById('secondImg');
 var thirdImgEl = document.getElementById('thirdImg');
+var previousPicArr = [];
 
 var allPics = [];
 
@@ -41,9 +42,12 @@ new Picture('toeless-galoshes');
 new Picture('usb-tentacle');
 new Picture('warped-watering-can');
 
-formEl.addEventListener('click', someCallbackFunction);
+formEl.addEventListener('click', handleSelectionSubmit);
 
-function someCallbackFunction(event) {
+function handleSelectionSubmit(event) {
+  event.preventDefault();
+
+  // On click, update clicked property of Picture that was clicked on
 
 }
 
@@ -51,10 +55,9 @@ function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-// Generate three random numbers
-// Store in the threePics array
-// Display the three images from the allPics[] with indices matching the three random numbers
-(function() {
+function renderPhotos() {
+  // Store current photo alt values into previousPicsArr
+  //get new, non-duplicate photos that do no duplicate any in previousPicArr
   var pictureIndexArr = [];
   var i = 3; // Number of photos needed to be selected
 
@@ -83,4 +86,11 @@ function randomInteger(min, max) {
   firstImgEl.src = allPics[pictureIndexArr[0]].src;
   secondImgEl.src = allPics[pictureIndexArr[1]].src;
   thirdImgEl.src = allPics[pictureIndexArr[2]].src;
+}
+
+// Generate three random numbers
+// Store in the threePics array
+// Display the three images from the allPics[] with indices matching the three random numbers
+(function() {
+  renderPhotos();
 })();
