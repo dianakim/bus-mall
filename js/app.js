@@ -60,6 +60,7 @@ function randomInteger(min, max) {
 
 function storePreviousPics() {
   // Store current photo alt values into previousPicsArr
+  console.log('firstImgEl.alt is ', firstRadioEl.alt);
   previousPics[0] = firstImgEl.alt;
   previousPics[1] = secondImgEl.alt;
   previousPics[2] = thirdImgEl.alt;
@@ -107,8 +108,14 @@ function renderPictures() {
   }
 
   firstImgEl.src = allPics[picsToBeRendered[0]].src;
+  firstImgEl.alt = allPics[picsToBeRendered[0]].alt;
+  firstImgEl.title = allPics[picsToBeRendered[0]].title;
   secondImgEl.src = allPics[picsToBeRendered[1]].src;
+  secondImgEl.alt = allPics[picsToBeRendered[1]].alt;
+  secondImgEl.title = allPics[picsToBeRendered[1]].title;
   thirdImgEl.src = allPics[picsToBeRendered[2]].src;
+  thirdImgEl.alt = allPics[picsToBeRendered[2]].alt;
+  thirdImgEl.title = allPics[picsToBeRendered[2]].title;
 }
 
 // Generate three random numbers
