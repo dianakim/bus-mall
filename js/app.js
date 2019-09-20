@@ -83,8 +83,7 @@ function clearSelection() {
 }
 
 function renderPictures() {
-
-
+  picIndexesToRender.length = 0;
   var i = 3; // Number of photos needed to be selected
 
   // While a photo is still needed
@@ -128,6 +127,7 @@ function renderPictures() {
   allPics[picIndexesToRender[0]].shown++;
   allPics[picIndexesToRender[1]].shown++;
   allPics[picIndexesToRender[2]].shown++;
+  console.log('pics to render array ', picIndexesToRender);
 }
 
 // Generate three random numbers
