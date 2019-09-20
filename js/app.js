@@ -9,9 +9,10 @@ var thirdImgEl = document.getElementById('thirdImg');
 var firstRadioEl = document.getElementById('imgOne');
 var secondRadioEl = document.getElementById('imgTwo');
 var thirdRadioEl = document.getElementById('imgThree');
+var resultsUlEl = document.getElementById('results-list');
 var previousPics = [];
 var picIndexesToRender = [];
-var selectionsNeeded = 25;
+var selectionsNeeded = 3;
 var allPics = [];
 
 function Picture(name) {
@@ -69,6 +70,17 @@ function handleSelectionSubmit(event) {
 
   if(selectionsNeeded === 0) {
     formEl.removeEventListener('submit', handleSelectionSubmit);
+    renderResults();
+  }
+}
+
+function renderResults() {
+  // For each item in allPics
+  for(var i = 0; i < allPics.length; i++) { 
+    var liEl = document.createElement('li');
+    liEl.class = 'results';
+    liEl.textContent = `${allPics[i].clicked} votes for the ${allPics[i].title} `;
+    resultsUlEl.appendChild(liEl);
   }
 }
 
