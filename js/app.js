@@ -42,12 +42,13 @@ new Picture('toeless-galoshes');
 new Picture('usb-tentacle');
 new Picture('warped-watering-can');
 
-formEl.addEventListener('click', handleSelectionSubmit);
+formEl.addEventListener('submit', handleSelectionSubmit);
 
 function handleSelectionSubmit(event) {
   event.preventDefault();
 
   // On click, update clicked property of Picture that was clicked on
+  renderPictures();
 
 }
 
@@ -62,17 +63,23 @@ function renderPictures() {
   previousPics[2] = thirdImgEl.alt;
   console.log('previousPics ', previousPics);
 
-  //get new, non-duplicate photos that do no duplicate any in previousPics
   var picsToBeRendered = [];
   var i = 3; // Number of photos needed to be selected
-
+  
   // While a photo is still needed
   while(i > 0) {
+    var duplicateIndex = false;
+    var randNum = randomInteger(0, allPics.length - 1);
+    // Loop through previousPics
+    // Get new randNum if current photo alt at index of randNum matches a previously rendered photo alt
+    for(var k = 0; k < previousPics.length; k++) {
+      while(allPics[randNum].alt === previousPics[k]) {
+        randNum = randomInteger(0, allPics.length - 1);
+      }
+    }
     // Check if there is already a photo in the picsToBeRendered
     // If the current randNum is already in the picsToBeRendered
     // Set duplicateIndex value to true and get a different randNum
-    var duplicateIndex = false;
-    var randNum = randomInteger(0, allPics.length - 1);
     if(picsToBeRendered.length > 0) {
       for(var j = 0; j < picsToBeRendered.length; j++) {
         if(randNum === picsToBeRendered[j]) {
