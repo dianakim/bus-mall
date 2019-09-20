@@ -76,10 +76,12 @@ function handleSelectionSubmit(event) {
 
 function renderResults() {
   // For each item in allPics
-  for(var i = 0; i < allPics.length; i++) { 
+  for(var i = 0; i < allPics.length; i++) {
+    var oldName = allPics[i].title;
+    var newName = oldName.replace(/-/g, ' ');
     var liEl = document.createElement('li');
     liEl.class = 'results';
-    liEl.textContent = `${allPics[i].clicked} votes for the ${allPics[i].title} `;
+    liEl.textContent = `${allPics[i].clicked} votes for the ${newName} `;
     resultsUlEl.appendChild(liEl);
   }
 }
