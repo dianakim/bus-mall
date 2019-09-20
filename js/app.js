@@ -47,6 +47,7 @@ new Picture('usb-tentacle');
 new Picture('warped-watering-can');
 
 formEl.addEventListener('submit', handleSelectionSubmit);
+formEl.addEventListener('click', handleImageClick);
 
 function handleSelectionSubmit(event) {
   event.preventDefault();
@@ -72,6 +73,14 @@ function handleSelectionSubmit(event) {
     formEl.removeEventListener('submit', handleSelectionSubmit);
     renderResults();
   }
+}
+
+function handleImageClick(event) {
+  // event.preventDefault();
+  var selectedImageClass = event.target.className;
+  var radioEl = document.getElementsByClassName(selectedImageClass);
+
+  radioEl[1].checked = true;
 }
 
 function renderResults() {
