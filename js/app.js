@@ -11,6 +11,7 @@ var secondRadioEl = document.getElementById('imgTwo');
 var thirdRadioEl = document.getElementById('imgThree');
 var previousPics = [];
 var picIndexesToRender = [];
+var selectionsNeeded = 25;
 var allPics = [];
 
 function Picture(name) {
@@ -52,15 +53,22 @@ function handleSelectionSubmit(event) {
   // update click property for picture that was selected
   if(firstRadioEl.checked) {
     allPics[picIndexesToRender[0]].clicked++;
+    selectionsNeeded--;
     renderPictures();
   } else if(secondRadioEl.checked) {
     allPics[picIndexesToRender[1]].clicked++;
+    selectionsNeeded--;
     renderPictures();
   } else if(thirdRadioEl.checked) {
     allPics[picIndexesToRender[2]].clicked++;
+    selectionsNeeded--;
     renderPictures();
   } else {
     alert('Please select one product.');
+  }
+
+  if(selectionsNeeded === 0) {
+    formEl.removeEventListener('submit', handleSelectionSubmit);
   }
 }
 
@@ -131,7 +139,6 @@ function renderPictures() {
   allPics[picIndexesToRender[0]].shown++;
   allPics[picIndexesToRender[1]].shown++;
   allPics[picIndexesToRender[2]].shown++;
-  console.log('pics to render array ', picIndexesToRender);
 }
 
 // Generate three random numbers
