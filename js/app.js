@@ -116,6 +116,13 @@ function renderPictures() {
   thirdImgEl.src = allPics[picsToBeRendered[2]].src;
   thirdImgEl.alt = allPics[picsToBeRendered[2]].alt;
   thirdImgEl.title = allPics[picsToBeRendered[2]].title;
+  allPics[picsToBeRendered[0]].shown++;
+  allPics[picsToBeRendered[1]].shown++;
+  allPics[picsToBeRendered[2]].shown++;
+  console.log('img one shown #times: ', allPics[picsToBeRendered[0]].shown);
+  console.log('img two shown #times: ', allPics[picsToBeRendered[1]].shown);
+  console.log('img three shown #times: ', allPics[picsToBeRendered[2]].shown);
+  console.log(allPics);
 }
 
 // Generate three random numbers
