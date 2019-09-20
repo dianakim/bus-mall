@@ -10,6 +10,7 @@ var firstRadioEl = document.getElementById('imgOne');
 var secondRadioEl = document.getElementById('imgTwo');
 var thirdRadioEl = document.getElementById('imgThree');
 var previousPics = [];
+var picIndexesToRender = [];
 var allPics = [];
 
 function Picture(name) {
@@ -48,8 +49,18 @@ formEl.addEventListener('submit', handleSelectionSubmit);
 function handleSelectionSubmit(event) {
   event.preventDefault();
 
-  // On click, update clicked property of Picture that was clicked on
+  if(firstRadioEl.checked) {
+    allPics[picIndexesToRender[0]].clicked++;
+  } else if(secondRadioEl.checked) {
+    allPics[picIndexesToRender[1]].clicked++;
+  } else if(thirdRadioEl.checked) {
+    allPics[picIndexesToRender[2]].clicked++;
+  }
+
+  console.log(' clicked ', allPics);
+
   storePreviousPics();
+  // update click property for picture that was selected
   renderPictures();
   clearSelection();
 }
@@ -60,11 +71,9 @@ function randomInteger(min, max) {
 
 function storePreviousPics() {
   // Store current photo alt values into previousPicsArr
-  console.log('firstImgEl.alt is ', firstRadioEl.alt);
   previousPics[0] = firstImgEl.alt;
   previousPics[1] = secondImgEl.alt;
   previousPics[2] = thirdImgEl.alt;
-  console.log('previousPics ', previousPics);
 }
 
 function clearSelection() {
@@ -75,7 +84,7 @@ function clearSelection() {
 
 function renderPictures() {
 
-  var picsToBeRendered = [];
+
   var i = 3; // Number of photos needed to be selected
 
   // While a photo is still needed
@@ -92,9 +101,9 @@ function renderPictures() {
     // Check if there is already a photo in the picsToBeRendered
     // If the current randNum is already in the picsToBeRendered
     // Set duplicateIndex value to true and get a different randNum
-    if(picsToBeRendered.length > 0) {
-      for(var j = 0; j < picsToBeRendered.length; j++) {
-        if(randNum === picsToBeRendered[j]) {
+    if(picIndexesToRender.length > 0) {
+      for(var j = 0; j < picIndexesToRender.length; j++) {
+        if(randNum === picIndexesToRender[j]) {
           duplicateIndex = true; // Photo at this index has already been selected
         }
       }
@@ -102,27 +111,23 @@ function renderPictures() {
 
     // If it's not a duplicate, save it to the array to be rendered
     if(duplicateIndex === false) {
-      picsToBeRendered.push(randNum);
+      picIndexesToRender.push(randNum);
       i--;
     }
   }
 
-  firstImgEl.src = allPics[picsToBeRendered[0]].src;
-  firstImgEl.alt = allPics[picsToBeRendered[0]].alt;
-  firstImgEl.title = allPics[picsToBeRendered[0]].title;
-  secondImgEl.src = allPics[picsToBeRendered[1]].src;
-  secondImgEl.alt = allPics[picsToBeRendered[1]].alt;
-  secondImgEl.title = allPics[picsToBeRendered[1]].title;
-  thirdImgEl.src = allPics[picsToBeRendered[2]].src;
-  thirdImgEl.alt = allPics[picsToBeRendered[2]].alt;
-  thirdImgEl.title = allPics[picsToBeRendered[2]].title;
-  allPics[picsToBeRendered[0]].shown++;
-  allPics[picsToBeRendered[1]].shown++;
-  allPics[picsToBeRendered[2]].shown++;
-  console.log('img one shown #times: ', allPics[picsToBeRendered[0]].shown);
-  console.log('img two shown #times: ', allPics[picsToBeRendered[1]].shown);
-  console.log('img three shown #times: ', allPics[picsToBeRendered[2]].shown);
-  console.log(allPics);
+  firstImgEl.src = allPics[picIndexesToRender[0]].src;
+  firstImgEl.alt = allPics[picIndexesToRender[0]].alt;
+  firstImgEl.title = allPics[picIndexesToRender[0]].title;
+  secondImgEl.src = allPics[picIndexesToRender[1]].src;
+  secondImgEl.alt = allPics[picIndexesToRender[1]].alt;
+  secondImgEl.title = allPics[picIndexesToRender[1]].title;
+  thirdImgEl.src = allPics[picIndexesToRender[2]].src;
+  thirdImgEl.alt = allPics[picIndexesToRender[2]].alt;
+  thirdImgEl.title = allPics[picIndexesToRender[2]].title;
+  allPics[picIndexesToRender[0]].shown++;
+  allPics[picIndexesToRender[1]].shown++;
+  allPics[picIndexesToRender[2]].shown++;
 }
 
 // Generate three random numbers
