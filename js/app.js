@@ -3,12 +3,13 @@
 var canvasEl = document.getElementById('my-canvas');
 
 var formEl = document.getElementById('form-container');
-
 var firstImgEl = document.getElementById('firstImg');
 var secondImgEl = document.getElementById('secondImg');
 var thirdImgEl = document.getElementById('thirdImg');
+var firstRadioEl = document.getElementById('imgOne');
+var secondRadioEl = document.getElementById('imgTwo');
+var thirdRadioEl = document.getElementById('imgThree');
 var previousPics = [];
-
 var allPics = [];
 
 function Picture(name) {
@@ -48,24 +49,34 @@ function handleSelectionSubmit(event) {
   event.preventDefault();
 
   // On click, update clicked property of Picture that was clicked on
+  storePreviousPics();
   renderPictures();
-
+  clearSelection();
 }
 
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function renderPictures() {
+function storePreviousPics() {
   // Store current photo alt values into previousPicsArr
   previousPics[0] = firstImgEl.alt;
   previousPics[1] = secondImgEl.alt;
   previousPics[2] = thirdImgEl.alt;
   console.log('previousPics ', previousPics);
+}
+
+function clearSelection() {
+  firstRadioEl.checked = false;
+  secondRadioEl.checked = false;
+  thirdRadioEl.checked = false;
+}
+
+function renderPictures() {
 
   var picsToBeRendered = [];
   var i = 3; // Number of photos needed to be selected
-  
+
   // While a photo is still needed
   while(i > 0) {
     var duplicateIndex = false;
