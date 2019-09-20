@@ -2,6 +2,8 @@
 
 var canvasEl = document.getElementById('my-canvas');
 
+var formEl = document.getElementById('form-container');
+
 var firstImgEl = document.getElementById('firstImg');
 var secondImgEl = document.getElementById('secondImg');
 var thirdImgEl = document.getElementById('thirdImg');
@@ -39,47 +41,43 @@ new Picture('toeless-galoshes');
 new Picture('usb-tentacle');
 new Picture('warped-watering-can');
 
+formEl.addEventListener('click', someCallbackFunction);
+
+function someCallbackFunction(event) {
+
+}
+
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-// Generate three random numbers in the range of 0 and allPics.length - 1.
+// Generate three random numbers
 // Store in the threePics array
+// Display the three images from the allPics[] with indices matching the three random numbers
 (function() {
   var pictureIndexArr = [];
   var i = 3; // Number of photos needed to be selected
-
-  // While we still need another picture
+  
   while(i > 0) {
+    var duplicateIndex = false;
     var randNum = randomInteger(0, allPics.length - 1);
-
-    pictureIndexArr.push(randNum);
-    i--;
+    // If there is an index in the pictureIndexArr
+    // And if the current randNum is already in the array
+    // Break out of the loop to start the while loop again
+    if(pictureIndexArr.length > 0) {
+      for(var j = 0; j < pictureIndexArr.length - 1; j++) {
+        if(randNum === pictureIndexArr[j]) {
+          duplicateIndex = true;
+        }
+      }
+    }
+    if(duplicateIndex === false) {
+      pictureIndexArr.push(randNum);
+      i--;
+    }
   }
-  console.log('pictureIndexArr ', pictureIndexArr);
-  console.log('allpics ', allPics);
 
-  // Display the three images from the allPics[] with indices matching the three random numbers
   firstImgEl.src = allPics[pictureIndexArr[0]].src;
   secondImgEl.src = allPics[pictureIndexArr[1]].src;
   thirdImgEl.src = allPics[pictureIndexArr[2]].src;
 })();
-
-  // var pictureIndexArr = [];
-  // var i = 3; // Number of photos needed to be selecte
-
-// // While we still need another picture
-// while(i > 0) {
-  //   var randNum = randomInteger(0, allPics.length - 1);
-  //   // Loop through pictureIndexArr
-  //   for(var j = 0; j < pictureIndexArr.length - 1; j++) {
-//     // If randNum matches any of the current values, get another random number1
-//     if(randNum === pictureIndexArr[j]) {
-//       break;
-//     // Else store the random number in the pictureIndexArr
-//     // Increment j
-//     } else {
-//       pictureIndexArr.push;
-//       i--;
-//     }
-//   }
