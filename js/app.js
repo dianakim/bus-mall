@@ -49,20 +49,19 @@ formEl.addEventListener('submit', handleSelectionSubmit);
 function handleSelectionSubmit(event) {
   event.preventDefault();
 
+  // update click property for picture that was selected
   if(firstRadioEl.checked) {
     allPics[picIndexesToRender[0]].clicked++;
+    renderPictures();
   } else if(secondRadioEl.checked) {
     allPics[picIndexesToRender[1]].clicked++;
+    renderPictures();
   } else if(thirdRadioEl.checked) {
     allPics[picIndexesToRender[2]].clicked++;
+    renderPictures();
+  } else {
+    alert('Please select one product.');
   }
-
-  console.log(' clicked ', allPics);
-
-  storePreviousPics();
-  // update click property for picture that was selected
-  renderPictures();
-  clearSelection();
 }
 
 function randomInteger(min, max) {
@@ -76,14 +75,18 @@ function storePreviousPics() {
   previousPics[2] = thirdImgEl.alt;
 }
 
-function clearSelection() {
+function clearRadioSelection() {
   firstRadioEl.checked = false;
   secondRadioEl.checked = false;
   thirdRadioEl.checked = false;
 }
 
 function renderPictures() {
+  storePreviousPics();
+  clearRadioSelection();
   picIndexesToRender.length = 0;
+  console.log('picIndexsToRend ', picIndexesToRender);
+
   var i = 3; // Number of photos needed to be selected
 
   // While a photo is still needed
@@ -115,6 +118,7 @@ function renderPictures() {
     }
   }
 
+  // REFACTOR!!!!
   firstImgEl.src = allPics[picIndexesToRender[0]].src;
   firstImgEl.alt = allPics[picIndexesToRender[0]].alt;
   firstImgEl.title = allPics[picIndexesToRender[0]].title;
