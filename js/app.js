@@ -55,42 +55,47 @@ function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function renderPhotos() {
+function renderPictures() {
   // Store current photo alt values into previousPicsArr
+  previousPicArr[0] = firstImgEl.alt;
+  previousPicArr[1] = secondImgEl.alt;
+  previousPicArr[2] = thirdImgEl.alt;
+  console.log('previousPicArr ', previousPicArr);
+
   //get new, non-duplicate photos that do no duplicate any in previousPicArr
-  var pictureIndexArr = [];
+  var picsToBeRendered = []; // Holds the photos to be rendered
   var i = 3; // Number of photos needed to be selected
 
+  // While a photo is still needed
   while(i > 0) {
+    // Check if there is already a photo in the pictureIndexArr
+    // If the current randNum is already in the pictureIndexArr
+    // Set duplicateIndex value to true and get a different randNum
     var duplicateIndex = false;
     var randNum = randomInteger(0, allPics.length - 1);
-    // If there is an index in the pictureIndexArr
-    // And if the current randNum is already in the array
-    // Break out of the loop to start the while loop again
-    if(pictureIndexArr.length > 0) {
-      for(var j = 0; j < pictureIndexArr.length; j++) {
-        console.log('randNum is ', randNum);
-        console.log('pictureIndexArr is ', pictureIndexArr[j]);
-        console.log('triple equals?  ', randNum === pictureIndexArr[j]);
-        if(randNum === pictureIndexArr[j]) {
-          duplicateIndex = true;
+    if(picsToBeRendered.length > 0) {
+      for(var j = 0; j < picsToBeRendered.length; j++) {
+        if(randNum === picsToBeRendered[j]) {
+          duplicateIndex = true; // Photo at this index has already been selected
         }
       }
     }
+
+    // If it's not a duplicate, save it to the array to be rendered
     if(duplicateIndex === false) {
-      pictureIndexArr.push(randNum);
+      picsToBeRendered.push(randNum);
       i--;
     }
   }
 
-  firstImgEl.src = allPics[pictureIndexArr[0]].src;
-  secondImgEl.src = allPics[pictureIndexArr[1]].src;
-  thirdImgEl.src = allPics[pictureIndexArr[2]].src;
+  firstImgEl.src = allPics[picsToBeRendered[0]].src;
+  secondImgEl.src = allPics[picsToBeRendered[1]].src;
+  thirdImgEl.src = allPics[picsToBeRendered[2]].src;
 }
 
 // Generate three random numbers
 // Store in the threePics array
 // Display the three images from the allPics[] with indices matching the three random numbers
 (function() {
-  renderPhotos();
+  renderPictures();
 })();
