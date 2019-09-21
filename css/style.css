@@ -12,8 +12,8 @@ html {
 body {
   height: 100%;
   margin: 0;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 5%;
+  padding-right: 5%;
   line-height: 1.2;
   background-color: #F3F3F3;
 }
@@ -109,10 +109,6 @@ main {
   margin: 10px;
 } */
 
-#form-container {
-  margin: 10px;
-}
-
 /* sidebar h2 {
   margin-bottom: 30px;
   font-family: "Philosopher", sans-serif;
@@ -133,6 +129,7 @@ main {
   overflow: auto;
   margin-bottom: 100px;
 } */
+
 #form-container {
   width: 100%;
   margin: 0 auto 100px auto;
@@ -175,6 +172,10 @@ label {
 #blurb-section {
   padding: 10px;
   border-top: 1px solid #FFD02E;
+}
+
+#results-chart {
+  margin-bottom: 100px;
 }
 
 footer {

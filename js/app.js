@@ -8,10 +8,9 @@ var firstRadioEl = document.getElementById('imgOne');
 var secondRadioEl = document.getElementById('imgTwo');
 var thirdRadioEl = document.getElementById('imgThree');
 var submitEl = document.getElementById('vote-button');
-var resultsUlEl = document.getElementById('results-list');
 var previousPics = [];
 var picIndexesToRender = [];
-var selectionsNeeded = 2;
+var selectionsNeeded = 10;
 var allPics = [];
 
 function Picture(name) {
@@ -85,30 +84,6 @@ function handleImageClick(event) {
   radioEl.checked = true;
 }
 
-function renderResults() {
-  var clickedToShown;
-
-  // For each item in allPics
-  for(var i = 0; i < allPics.length; i++) {
-    var oldName = allPics[i].title;
-    var newName = oldName.replace(/-/g, ' ');
-    var liEl = document.createElement('li');
-    liEl.class = 'results';
-    liEl.textContent = `${newName}: ${allPics[i].clicked} votes`;
-    resultsUlEl.appendChild(liEl);
-
-    clickedToShown = calcClickedToShownPercentage(allPics[i].clicked, allPics[i].shown);
-    liEl = document.createElement('li');
-    liEl.class = 'results percentage';
-    liEl.textContent = `Selected ${clickedToShown}% of times shown.`;
-    resultsUlEl.appendChild(liEl);
-  }
-}
-
-function calcClickedToShownPercentage(clicked, shown) {
-  return Math.floor((clicked / shown) * 100);
-}
-
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -177,14 +152,36 @@ function renderPictures() {
   allPics[picIndexesToRender[2]].shown++;
 }
 
+function renderResults(){
+  var allPicPercentages = [];
+
+  for(var i = 0; i < allPics.length; i++) {
+    var oldName = allPics[i].title;
+    var newName = oldName.replace(/-/g, ' ');
+
+    myChart.data.labels[i] = newName;
+    myChart.data.datasets[0].data[i] = allPics[i].clicked;
+
+    allPicPercentages.push(calcPercentageClicked(allPics[i].clicked, allPics[i].shown));
+
+    myChart.update();
+  }
+}
+
+function calcPercentageClicked(clicked, shown) {
+  return Math.floor((clicked / shown) * 100);
+}
+
 var ctx = document.getElementById('results-chart').getContext('2d');
 var myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    // replace values in labels with names of all the pictures
+    labels: [],
     datasets: [{
       label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
+      // replace values in data with number of votes for each picture
+      data: [],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -215,9 +212,6 @@ var myChart = new Chart(ctx, {
   }
 });
 
-// Generate three random numbers
-// Store in the threePics array
-// Display the three images from the allPics[] with indices matching the three random numbers
 (function() {
   renderPictures();
   alert('Please select which one of the three displayed products you would be most likely to purchase. You will be asked to make 25 selections. Thank you for your participation.');
