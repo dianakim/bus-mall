@@ -10,8 +10,10 @@ var thirdRadioEl = document.getElementById('imgThree');
 var submitEl = document.getElementById('vote-button');
 var previousPics = [];
 var picIndexesToRender = [];
-var selectionsNeeded = 25;
+var selectionsNeeded = 5;
 var allPics = [];
+var localAllPics;
+var picsKey;
 
 function Picture(name) {
   this.src = `../img/${name}.jpg`;
@@ -76,7 +78,13 @@ function handleSelectionSubmit(event) {
     thirdImgEl.removeEventListener('click', handleImageClick);
     submitEl.disabled = true;
     renderResults();
+    storeLocalAllPics();
   }
+}
+function storeLocalAllPics() {
+  var jsonAllPics = JSON.stringify(allPics);
+  localStorage.setItem(picsKey, jsonAllPics);
+  console.log('stringified ', jsonAllPics);
 }
 
 function handleImageClick(event) {
@@ -262,5 +270,10 @@ var myChart = new Chart(ctx, {
 
 (function() {
   renderPictures();
+  if(localStorage.length > 0) {
+    allPics = JSON.parse(localStorage.getItem(picsKey));
+    console.log('parsed ', allPics);
+  }
+
   alert('Please select which one of the three displayed products you would be most likely to purchase. You will be asked to make 25 selections. Thank you for your participation.');
 })();
