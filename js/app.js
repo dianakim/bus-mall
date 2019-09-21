@@ -1,7 +1,5 @@
 'use strict';
 
-var canvasEl = document.getElementById('my-canvas');
-
 var formEl = document.getElementById('form-container');
 var firstImgEl = document.getElementById('firstImg');
 var secondImgEl = document.getElementById('secondImg');
@@ -13,7 +11,7 @@ var submitEl = document.getElementById('vote-button');
 var resultsUlEl = document.getElementById('results-list');
 var previousPics = [];
 var picIndexesToRender = [];
-var selectionsNeeded = 25;
+var selectionsNeeded = 2;
 var allPics = [];
 
 function Picture(name) {
@@ -179,9 +177,48 @@ function renderPictures() {
   allPics[picIndexesToRender[2]].shown++;
 }
 
+var ctx = document.getElementById('results-chart').getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
+
 // Generate three random numbers
 // Store in the threePics array
 // Display the three images from the allPics[] with indices matching the three random numbers
 (function() {
   renderPictures();
+  alert('Please select which one of the three displayed products you would be most likely to purchase. You will be asked to make 25 selections. Thank you for your participation.');
 })();
