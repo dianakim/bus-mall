@@ -10,8 +10,9 @@ var thirdRadioEl = document.getElementById('imgThree');
 var submitEl = document.getElementById('vote-button');
 var previousPics = [];
 var picIndexesToRender = [];
-var selectionsNeeded = 25;
+var selectionsNeeded = 5;
 var allPics = [];
+var localAllPics;
 
 function Picture(name) {
   this.src = `../img/${name}.jpg`;
@@ -76,7 +77,12 @@ function handleSelectionSubmit(event) {
     thirdImgEl.removeEventListener('click', handleImageClick);
     submitEl.disabled = true;
     renderResults();
+    storeLocalAllPics();
   }
+}
+function storeLocalAllPics() {
+  localAllPics = JSON.stringify(allPics);
+  console.log(localAllPics);
 }
 
 function handleImageClick(event) {
