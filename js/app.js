@@ -1,7 +1,5 @@
 'use strict';
 
-var canvasEl = document.getElementById('my-canvas');
-
 var formEl = document.getElementById('form-container');
 var firstImgEl = document.getElementById('firstImg');
 var secondImgEl = document.getElementById('secondImg');
@@ -10,10 +8,9 @@ var firstRadioEl = document.getElementById('imgOne');
 var secondRadioEl = document.getElementById('imgTwo');
 var thirdRadioEl = document.getElementById('imgThree');
 var submitEl = document.getElementById('vote-button');
-var resultsUlEl = document.getElementById('results-list');
 var previousPics = [];
 var picIndexesToRender = [];
-var selectionsNeeded = 5;
+var selectionsNeeded = 25;
 var allPics = [];
 
 function Picture(name) {
@@ -87,18 +84,6 @@ function handleImageClick(event) {
   radioEl.checked = true;
 }
 
-function renderResults() {
-  // For each item in allPics
-  for(var i = 0; i < allPics.length; i++) {
-    var oldName = allPics[i].title;
-    var newName = oldName.replace(/-/g, ' ');
-    var liEl = document.createElement('li');
-    liEl.class = 'results';
-    liEl.textContent = `${allPics[i].clicked} votes for the ${newName} `;
-    resultsUlEl.appendChild(liEl);
-  }
-}
-
 function randomInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -120,7 +105,6 @@ function renderPictures() {
   storePreviousPics();
   clearRadioSelection();
   picIndexesToRender.length = 0;
-  console.log('picIndexsToRend ', picIndexesToRender);
 
   var i = 3; // Number of photos needed to be selected
 
@@ -168,9 +152,115 @@ function renderPictures() {
   allPics[picIndexesToRender[2]].shown++;
 }
 
-// Generate three random numbers
-// Store in the threePics array
-// Display the three images from the allPics[] with indices matching the three random numbers
+function renderResults(){
+  var allPicPercentages = [];
+
+  for(var i = 0; i < allPics.length; i++) {
+    var oldName = allPics[i].title;
+    var newName = oldName.replace(/-/g, ' ');
+
+    myChart.data.labels[i] = newName;
+    myChart.data.datasets[0].data[i] = allPics[i].clicked;
+
+    allPicPercentages.push(calcPercentageClicked(allPics[i].clicked, allPics[i].shown));
+
+    myChart.update();
+  }
+}
+
+function calcPercentageClicked(clicked, shown) {
+  return Math.floor((clicked / shown) * 100);
+}
+
+var ctx = document.getElementById('results-chart').getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    // replace values in labels with names of all the pictures
+    labels: [],
+    datasets: [{
+      label: '# of Votes',
+      // replace values in data with number of votes for each picture
+      data: [],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+      ],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
+
 (function() {
   renderPictures();
+  alert('Please select which one of the three displayed products you would be most likely to purchase. You will be asked to make 25 selections. Thank you for your participation.');
 })();

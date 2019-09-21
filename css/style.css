@@ -12,8 +12,8 @@ html {
 body {
   height: 100%;
   margin: 0;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 5%;
+  padding-right: 5%;
   line-height: 1.2;
   background-color: #F3F3F3;
 }
@@ -88,7 +88,7 @@ main {
   padding-bottom: 200px;
 }
 
-sidebar {
+/* sidebar {
   display: inline-block;
   vertical-align: top;
   height: 100%;
@@ -96,31 +96,31 @@ sidebar {
   width: 18%;
   padding: 10px;
   overflow: auto;
-}
+} */
 
-#content {
+/* #content {
   display: inline-block;
 	vertical-align: top;
 	height: 100%;
 	overflow: auto;
-}
+} */
 
-sidebar, #form-container {
+/* sidebar, #form-container {
   margin: 10px;
-}
+} */
 
-sidebar h2 {
+/* sidebar h2 {
   margin-bottom: 30px;
   font-family: "Philosopher", sans-serif;
   font-size: 20px;
-}
-
+} */
+/* 
 .results {
   list-style: disc inside;
   padding-left: 20px;
-}
+} */
 
-#form-container {
+/* #form-container {
   display: inline-block;
   vertical-align: top;
   height: 100%;
@@ -128,6 +128,11 @@ sidebar h2 {
   width: 78%;
   overflow: auto;
   margin-bottom: 100px;
+} */
+
+#form-container {
+  width: 100%;
+  margin: 0 auto 100px auto;
 }
 
 .images {
@@ -167,6 +172,10 @@ label {
 #blurb-section {
   padding: 10px;
   border-top: 1px solid #FFD02E;
+}
+
+#results-chart {
+  margin-bottom: 100px;
 }
 
 footer {
