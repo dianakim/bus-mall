@@ -13,7 +13,7 @@ var submitEl = document.getElementById('vote-button');
 var resultsUlEl = document.getElementById('results-list');
 var previousPics = [];
 var picIndexesToRender = [];
-var selectionsNeeded = 5;
+var selectionsNeeded = 25;
 var allPics = [];
 
 function Picture(name) {
@@ -88,15 +88,27 @@ function handleImageClick(event) {
 }
 
 function renderResults() {
+  var clickedToShown;
+
   // For each item in allPics
   for(var i = 0; i < allPics.length; i++) {
     var oldName = allPics[i].title;
     var newName = oldName.replace(/-/g, ' ');
     var liEl = document.createElement('li');
     liEl.class = 'results';
-    liEl.textContent = `${allPics[i].clicked} votes for the ${newName} `;
+    liEl.textContent = `${newName}: ${allPics[i].clicked} votes`;
+    resultsUlEl.appendChild(liEl);
+
+    clickedToShown = calcClickedToShownPercentage(allPics[i].clicked, allPics[i].shown);
+    liEl = document.createElement('li');
+    liEl.class = 'results percentage';
+    liEl.textContent = `Selected ${clickedToShown}% of times shown.`;
     resultsUlEl.appendChild(liEl);
   }
+}
+
+function calcClickedToShownPercentage(clicked, shown) {
+  return Math.floor((clicked / shown) * 100);
 }
 
 function randomInteger(min, max) {
@@ -120,7 +132,6 @@ function renderPictures() {
   storePreviousPics();
   clearRadioSelection();
   picIndexesToRender.length = 0;
-  console.log('picIndexsToRend ', picIndexesToRender);
 
   var i = 3; // Number of photos needed to be selected
 
