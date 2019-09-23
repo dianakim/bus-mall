@@ -5,21 +5,15 @@ var formEl = document.getElementById('form-container');
 var firstImgEl = document.getElementById('first');
 var secondImgEl = document.getElementById('second');
 var thirdImgEl = document.getElementById('third');
-
 var imagesToSelect = document.getElementsByClassName('select-image');
-
 var radioEls = document.getElementsByName('select');
-
-// var firstRadioEl = document.getElementById('firstRadio');
-// var secondRadioEl = document.getElementById('secondRadio');
-// var thirdRadioEl = document.getElementById('thirdRadio');
-
 var submitEl = document.getElementById('vote-button');
 
 var previousPics = [];
 var picIndexesToRender = [];
 var selectionsNeeded = 5;
 var allPics = [];
+var allPicNames = ['baby-sweep-onesie', 'banana-cutter', 'bathroom-stand', 'canned-unicorn-meat', 'canned-dragon-meat', 'cthulhu-toy', 'duck-muzzle', 'lump-chair', 'meatball-bubblegum', 'modern-wine-goblet', 'pen-cutlery', 'pet-sweep','pizza-scissor-spatula', 'r2d2-rolling-bag', 'shark-sleeping-bag', 'tauntaun-sleeping-bag', 'toaster-coffee-maker', 'toeless-galoshes', 'usb-tentacle', 'warped-watering-can'];
 var picsKey;
 
 function Picture(name) {
@@ -33,27 +27,9 @@ function Picture(name) {
 }
 
 function makeNewPics(){
-  new Picture('baby-sweep-onesie');
-  new Picture('banana-cutter');
-  new Picture('bathroom-stand');
-  new Picture('canned-unicorn-meat');
-  new Picture('canned-dragon-meat');
-  new Picture('cthulhu-toy');
-  new Picture('duck-muzzle');
-  new Picture('lump-chair');
-  new Picture('meatball-bubblegum');
-  new Picture('modern-wine-goblet');
-  new Picture('pen-cutlery');
-  new Picture('pet-sweep');
-  new Picture('pizza-scissor-spatula');
-  new Picture('r2d2-rolling-bag');
-  new Picture('shark-sleeping-bag');
-  new Picture('tauntaun-sleeping-bag');
-  new Picture('toaster-coffee-maker');
-  new Picture('toeless-galoshes');
-  new Picture('usb-tentacle');
-  new Picture('warped-watering-can');
-  console.log('makeNewPics populated into allPics array? ', allPics);
+  for(var n = 0; n < allPicNames.length; n++) {
+    new Picture(allPicNames[n]);
+  }
 }
 
 formEl.addEventListener('submit', handleSelectionSubmit);
@@ -70,15 +46,6 @@ function handleSelectionSubmit(event) {
       allPics[picIndexesToRender[b]].clicked++;
     }
   }
-
-
-  // if(firstRadioEl.checked) {  
-  //   allPics[picIndexesToRender[0]].clicked++;
-  // } else if(secondRadioEl.checked) {
-  //   allPics[picIndexesToRender[1]].clicked++;
-  // } else if(thirdRadioEl.checked) {
-  //   allPics[picIndexesToRender[2]].clicked++;
-  // }
 
   if(selectionsNeeded === 1) {
     formEl.removeEventListener('submit', handleSelectionSubmit);
@@ -104,8 +71,6 @@ function storeLocalAllPics() {
 function handleImageClick(event) {
   for(var b = 0; b < radioEls.length; b++) {
     if(radioEls[b].id === `${event.target.id}Radio`) {
-      console.log('radioEls[b].id: ', radioEls[b].id);
-      console.log('event.target.id: ', event.target.id);
       radioEls[b].checked = true;
     }
   }
@@ -171,20 +136,6 @@ function renderPictures() {
     imagesToSelect[a].title = allPics[picIndexesToRender[a]].title;
     allPics[picIndexesToRender[a]].shown++;
   }
-
-  // // REFACTOR!!!!
-  // firstImgEl.src = allPics[picIndexesToRender[0]].src;
-  // firstImgEl.alt = allPics[picIndexesToRender[0]].alt;
-  // firstImgEl.title = allPics[picIndexesToRender[0]].title;
-  // secondImgEl.src = allPics[picIndexesToRender[1]].src;
-  // secondImgEl.alt = allPics[picIndexesToRender[1]].alt;
-  // secondImgEl.title = allPics[picIndexesToRender[1]].title;
-  // thirdImgEl.src = allPics[picIndexesToRender[2]].src;
-  // thirdImgEl.alt = allPics[picIndexesToRender[2]].alt;
-  // thirdImgEl.title = allPics[picIndexesToRender[2]].title;
-  // allPics[picIndexesToRender[0]].shown++;
-  // allPics[picIndexesToRender[1]].shown++;
-  // allPics[picIndexesToRender[2]].shown++;
 }
 
 function renderResults(){
