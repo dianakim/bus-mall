@@ -88,48 +88,6 @@ main {
   padding-bottom: 200px;
 }
 
-/* sidebar {
-  display: inline-block;
-  vertical-align: top;
-  height: 100%;
-  border: 1px solid #FFD02E;
-  width: 18%;
-  padding: 10px;
-  overflow: auto;
-} */
-
-/* #content {
-  display: inline-block;
-	vertical-align: top;
-	height: 100%;
-	overflow: auto;
-} */
-
-/* sidebar, #form-container {
-  margin: 10px;
-} */
-
-/* sidebar h2 {
-  margin-bottom: 30px;
-  font-family: "Philosopher", sans-serif;
-  font-size: 20px;
-} */
-/* 
-.results {
-  list-style: disc inside;
-  padding-left: 20px;
-} */
-
-/* #form-container {
-  display: inline-block;
-  vertical-align: top;
-  height: 100%;
-  border: 0.25px solid #FFD02E;
-  width: 78%;
-  overflow: auto;
-  margin-bottom: 100px;
-} */
-
 #form-container {
   width: 100%;
   margin: 0 auto 100px auto;

@@ -1,13 +1,21 @@
 'use strict';
 
 var formEl = document.getElementById('form-container');
-var firstImgEl = document.getElementById('firstImg');
-var secondImgEl = document.getElementById('secondImg');
-var thirdImgEl = document.getElementById('thirdImg');
-var firstRadioEl = document.getElementById('imgOne');
-var secondRadioEl = document.getElementById('imgTwo');
-var thirdRadioEl = document.getElementById('imgThree');
+
+var firstImgEl = document.getElementById('first');
+var secondImgEl = document.getElementById('second');
+var thirdImgEl = document.getElementById('third');
+
+var imagesToSelect = document.getElementsByClassName('select-image');
+
+var radioEls = document.getElementsByName('select');
+
+var firstRadioEl = document.getElementById('firstRadio');
+var secondRadioEl = document.getElementById('secondRadio');
+var thirdRadioEl = document.getElementById('thirdRadio');
+
 var submitEl = document.getElementById('vote-button');
+
 var previousPics = [];
 var picIndexesToRender = [];
 var selectionsNeeded = 5;
@@ -57,20 +65,21 @@ function handleSelectionSubmit(event) {
   event.preventDefault();
   console.log('after click, allPics: ', allPics);
   // update click property for picture that was selected
-  if(firstRadioEl.checked) {
+  if(firstRadioEl.checked) {  
     allPics[picIndexesToRender[0]].clicked++;
   } else if(secondRadioEl.checked) {
     allPics[picIndexesToRender[1]].clicked++;
   } else if(thirdRadioEl.checked) {
     allPics[picIndexesToRender[2]].clicked++;
   }
-  
+
   if(selectionsNeeded === 1) {
     formEl.removeEventListener('submit', handleSelectionSubmit);
     firstImgEl.removeEventListener('click', handleImageClick);
     secondImgEl.removeEventListener('click', handleImageClick);
     thirdImgEl.removeEventListener('click', handleImageClick);
     submitEl.disabled = true;
+    clearRadioSelection();
     renderResults();
     storeLocalAllPics();
     alert('Your participation is now complete. Thank you');
@@ -86,8 +95,13 @@ function storeLocalAllPics() {
 }
 
 function handleImageClick(event) {
-  var radioEl = document.getElementById(event.target.className);
-  radioEl.checked = true;
+  for(var b = 0; b < radioEls.length; b++) {
+    if(radioEls[b].id === `${event.target.id}Radio`) {
+      console.log('radioEls[b].id: ', radioEls[b].id);
+      console.log('event.target.id: ', event.target.id);
+      radioEls[b].checked = true;
+    }
+  }
 }
 
 function randomInteger(min, max) {
@@ -143,19 +157,27 @@ function renderPictures() {
     }
   }
 
-  // REFACTOR!!!!
-  firstImgEl.src = allPics[picIndexesToRender[0]].src;
-  firstImgEl.alt = allPics[picIndexesToRender[0]].alt;
-  firstImgEl.title = allPics[picIndexesToRender[0]].title;
-  secondImgEl.src = allPics[picIndexesToRender[1]].src;
-  secondImgEl.alt = allPics[picIndexesToRender[1]].alt;
-  secondImgEl.title = allPics[picIndexesToRender[1]].title;
-  thirdImgEl.src = allPics[picIndexesToRender[2]].src;
-  thirdImgEl.alt = allPics[picIndexesToRender[2]].alt;
-  thirdImgEl.title = allPics[picIndexesToRender[2]].title;
-  allPics[picIndexesToRender[0]].shown++;
-  allPics[picIndexesToRender[1]].shown++;
-  allPics[picIndexesToRender[2]].shown++;
+  //Loop through imagesToSelect and render photos from picIndexesToRender
+  for(var a = 0; a < imagesToSelect.length; a++) {
+    imagesToSelect[a].src = allPics[picIndexesToRender[a]].src;
+    imagesToSelect[a].alt = allPics[picIndexesToRender[a]].alt;
+    imagesToSelect[a].title = allPics[picIndexesToRender[a]].title;
+    allPics[picIndexesToRender[a]].shown++;
+  }
+
+  // // REFACTOR!!!!
+  // firstImgEl.src = allPics[picIndexesToRender[0]].src;
+  // firstImgEl.alt = allPics[picIndexesToRender[0]].alt;
+  // firstImgEl.title = allPics[picIndexesToRender[0]].title;
+  // secondImgEl.src = allPics[picIndexesToRender[1]].src;
+  // secondImgEl.alt = allPics[picIndexesToRender[1]].alt;
+  // secondImgEl.title = allPics[picIndexesToRender[1]].title;
+  // thirdImgEl.src = allPics[picIndexesToRender[2]].src;
+  // thirdImgEl.alt = allPics[picIndexesToRender[2]].alt;
+  // thirdImgEl.title = allPics[picIndexesToRender[2]].title;
+  // allPics[picIndexesToRender[0]].shown++;
+  // allPics[picIndexesToRender[1]].shown++;
+  // allPics[picIndexesToRender[2]].shown++;
 }
 
 function renderResults(){
