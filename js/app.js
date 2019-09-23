@@ -25,26 +25,29 @@ function Picture(name) {
   allPics.push(this);
 }
 
-new Picture('baby-sweep-onesie');
-new Picture('banana-cutter');
-new Picture('bathroom-stand');
-new Picture('canned-unicorn-meat');
-new Picture('canned-dragon-meat');
-new Picture('cthulhu-toy');
-new Picture('duck-muzzle');
-new Picture('lump-chair');
-new Picture('meatball-bubblegum');
-new Picture('modern-wine-goblet');
-new Picture('pen-cutlery');
-new Picture('pet-sweep');
-new Picture('pizza-scissor-spatula');
-new Picture('r2d2-rolling-bag');
-new Picture('shark-sleeping-bag');
-new Picture('tauntaun-sleeping-bag');
-new Picture('toaster-coffee-maker');
-new Picture('toeless-galoshes');
-new Picture('usb-tentacle');
-new Picture('warped-watering-can');
+function makeNewPics(){
+  new Picture('baby-sweep-onesie');
+  new Picture('banana-cutter');
+  new Picture('bathroom-stand');
+  new Picture('canned-unicorn-meat');
+  new Picture('canned-dragon-meat');
+  new Picture('cthulhu-toy');
+  new Picture('duck-muzzle');
+  new Picture('lump-chair');
+  new Picture('meatball-bubblegum');
+  new Picture('modern-wine-goblet');
+  new Picture('pen-cutlery');
+  new Picture('pet-sweep');
+  new Picture('pizza-scissor-spatula');
+  new Picture('r2d2-rolling-bag');
+  new Picture('shark-sleeping-bag');
+  new Picture('tauntaun-sleeping-bag');
+  new Picture('toaster-coffee-maker');
+  new Picture('toeless-galoshes');
+  new Picture('usb-tentacle');
+  new Picture('warped-watering-can');
+  console.log('makeNewPics populated into allPics array? ', allPics);
+}
 
 formEl.addEventListener('submit', handleSelectionSubmit);
 firstImgEl.addEventListener('click', handleImageClick);
@@ -53,7 +56,7 @@ thirdImgEl.addEventListener('click', handleImageClick);
 
 function handleSelectionSubmit(event) {
   event.preventDefault();
-
+  console.log('after click, allPics: ', allPics);
   // update click property for picture that was selected
   if(firstRadioEl.checked) {
     allPics[picIndexesToRender[0]].clicked++;
@@ -269,6 +272,7 @@ var myChart = new Chart(ctx, {
 });
 
 (function() {
+  makeNewPics();
   renderPictures();
   if(localStorage.length > 0) {
     allPics = JSON.parse(localStorage.getItem(picsKey));
