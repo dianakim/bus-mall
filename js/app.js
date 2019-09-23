@@ -10,9 +10,9 @@ var imagesToSelect = document.getElementsByClassName('select-image');
 
 var radioEls = document.getElementsByName('select');
 
-var firstRadioEl = document.getElementById('firstRadio');
-var secondRadioEl = document.getElementById('secondRadio');
-var thirdRadioEl = document.getElementById('thirdRadio');
+// var firstRadioEl = document.getElementById('firstRadio');
+// var secondRadioEl = document.getElementById('secondRadio');
+// var thirdRadioEl = document.getElementById('thirdRadio');
 
 var submitEl = document.getElementById('vote-button');
 
@@ -65,13 +65,20 @@ function handleSelectionSubmit(event) {
   event.preventDefault();
   console.log('after click, allPics: ', allPics);
   // update click property for picture that was selected
-  if(firstRadioEl.checked) {  
-    allPics[picIndexesToRender[0]].clicked++;
-  } else if(secondRadioEl.checked) {
-    allPics[picIndexesToRender[1]].clicked++;
-  } else if(thirdRadioEl.checked) {
-    allPics[picIndexesToRender[2]].clicked++;
+  for(var b = 0; b < radioEls.length; b++) {
+    if(radioEls[b].checked) {
+      allPics[picIndexesToRender[b]].clicked++;
+    }
   }
+
+
+  // if(firstRadioEl.checked) {  
+  //   allPics[picIndexesToRender[0]].clicked++;
+  // } else if(secondRadioEl.checked) {
+  //   allPics[picIndexesToRender[1]].clicked++;
+  // } else if(thirdRadioEl.checked) {
+  //   allPics[picIndexesToRender[2]].clicked++;
+  // }
 
   if(selectionsNeeded === 1) {
     formEl.removeEventListener('submit', handleSelectionSubmit);
@@ -116,9 +123,9 @@ function storePreviousPics() {
 }
 
 function clearRadioSelection() {
-  firstRadioEl.checked = false;
-  secondRadioEl.checked = false;
-  thirdRadioEl.checked = false;
+  for(var b = 0; b < radioEls.length; b++) {
+    radioEls[b].checked = false;
+  }
 }
 
 function renderPictures() {
