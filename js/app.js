@@ -59,19 +59,13 @@ function handleSelectionSubmit(event) {
   // update click property for picture that was selected
   if(firstRadioEl.checked) {
     allPics[picIndexesToRender[0]].clicked++;
-    selectionsNeeded--;
-    renderPictures();
   } else if(secondRadioEl.checked) {
     allPics[picIndexesToRender[1]].clicked++;
-    selectionsNeeded--;
-    renderPictures();
   } else if(thirdRadioEl.checked) {
     allPics[picIndexesToRender[2]].clicked++;
-    selectionsNeeded--;
-    renderPictures();
   }
-
-  if(selectionsNeeded === 0) {
+  
+  if(selectionsNeeded === 1) {
     formEl.removeEventListener('submit', handleSelectionSubmit);
     firstImgEl.removeEventListener('click', handleImageClick);
     secondImgEl.removeEventListener('click', handleImageClick);
@@ -79,6 +73,10 @@ function handleSelectionSubmit(event) {
     submitEl.disabled = true;
     renderResults();
     storeLocalAllPics();
+    alert('Your participation is now complete. Thank you');
+  } else {
+    selectionsNeeded--;
+    renderPictures();
   }
 }
 function storeLocalAllPics() {
