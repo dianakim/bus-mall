@@ -12,7 +12,6 @@ var previousPics = [];
 var picIndexesToRender = [];
 var selectionsNeeded = 5;
 var allPics = [];
-var localAllPics;
 var picsKey;
 
 function Picture(name) {
@@ -70,8 +69,6 @@ function handleSelectionSubmit(event) {
     allPics[picIndexesToRender[2]].clicked++;
     selectionsNeeded--;
     renderPictures();
-  } else {
-    alert('Please select one product.');
   }
 
   if(selectionsNeeded === 0) {
