@@ -17,7 +17,7 @@ var allPicNames = ['baby-sweep-onesie', 'banana-cutter', 'bathroom-stand', 'cann
 var picsKey;
 
 function Picture(name) {
-  this.src = `../img/${name}.jpg`;
+  this.src = `/../img/${name}.jpg`;
   this.alt = name;
   this.title = name;
   this.shown = '0';
